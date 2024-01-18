@@ -1,7 +1,6 @@
 import { useState } from "react";
 import GlobalStyle from "../styles";
 import Layout from "../components/Layout";
-import loadCustomRoutes from "next/dist/lib/load-custom-routes";
 
 const initialLights = [
   { id: "1", name: "Living Room", isOn: false },
@@ -28,6 +27,14 @@ export default function App({ Component, pageProps }) {
   const lightsOn = lights.filter((light) => light.isOn);
   const lightsOnCount = lightsOn.length;
 
+  function handleTurnLightsOn() {
+    setLights(lights.map((light) => ({ ...light, isOn: true })));
+  }
+
+  function handleTurnLightsOff() {
+    setLights(lights.map((light) => ({ ...light, isOn: false })));
+  }
+
   return (
     <Layout>
       <GlobalStyle />
@@ -36,6 +43,8 @@ export default function App({ Component, pageProps }) {
         lights={lights}
         handleToggle={handleToggle}
         lightsOnCount={lightsOnCount}
+        handleTurnLightsOn={handleTurnLightsOn}
+        handleTurnLightsOff={handleTurnLightsOff}
       />
     </Layout>
   );
